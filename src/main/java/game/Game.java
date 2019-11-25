@@ -37,6 +37,7 @@ public class Game {
 	private Label bestScoreLabel;
 	private int score = 0;
 	private int bestScore;
+	private ArrayList<Integer> currentNext = new ArrayList<Integer>();
 	private int[] current = new int[3];
 	private Rectangle[][] rectArr = new Rectangle[10][10];
 	private Rectangle[][] nextRectArr = new Rectangle[3][];
@@ -103,7 +104,7 @@ public class Game {
 		point[18] = "0,0:-1,-1:-1,0:-1,1:0,1:0,-1:1,-1:1,0:1,1";
 		for (int i = 0; i < group.length; i++) {
 			group[i] = new Group();
-		}
+		}		
 		score = 0;
 
 		TextGameOver.setFill(Color.BLACK);
@@ -140,6 +141,7 @@ public class Game {
 		this.user = user;
 	}
 	
+	
 	public void setRedValue(int redValue) {
 		this.redValue = redValue;
 	}
@@ -152,6 +154,11 @@ public class Game {
 		this.blueValue = blueValue;
 	}
 	
+	
+	public void setBestScore(int bestScore) {
+		this.bestScore = bestScore;
+	}
+
 	private void clearLines() {
 		for(int i = 0; i < 10; i++) {
 			widthLines[i] = true;
@@ -194,8 +201,8 @@ public class Game {
 			}
 		}
 		if(score > bestScore) {
-			bestScore = score;
-			System.out.println("best  : " + bestScore + " ,  score : "+ score );
+			bestScore = score;			
+			user.setBestScore(bestScore);
 		}
 		bestScoreLabel.setText("Best : " + bestScore + "점");
 		score = 0;
@@ -250,19 +257,18 @@ public class Game {
 				}
 			}
 		}
-		
-		current[0] = rd.nextInt(point.length);
-		current[1] = rd.nextInt(point.length);
-		current[2] = rd.nextInt(point.length);
-		nextBlock(current[0], 0);
-		nextBlock(current[1], 1);
-		nextBlock(current[2], 2);
+
+		currentNext.add(0, rd.nextInt(point.length));
+		currentNext.add(1, rd.nextInt(point.length));
+		currentNext.add(2, rd.nextInt(point.length));
+		nextBlock(currentNext.get(0), 0);
+		nextBlock(currentNext.get(1), 1);
+		nextBlock(currentNext.get(2), 2);
 	}
 
 	private void nextBlock(int a, int b) {
 		String[] pointList = point[a].split(":");
 		nextRectArr[b] = new Rectangle[pointList.length];
-		System.out.println(a);
 		for(int i = 0; i < pointList.length; i++) {
 			String[] point = pointList[i].split(",");
 			int x = b*6+Integer.parseInt(point[0])+2;
@@ -306,6 +312,7 @@ public class Game {
 	}
 	
 	public String saveGame() {
+		System.out.println(currentNext);
 		String resultString = "";
 		saveText = "";
 		int tf = 0;
@@ -316,7 +323,6 @@ public class Game {
 				saveText = saveText + tf + ",";
 			}
 		}
-		System.out.println("BEST : "+ bestScore);
 		resultString = saveText+":"+score + ":"+ bestScore;
 		return resultString;
 	}
@@ -331,8 +337,7 @@ public class Game {
 	            orgSceneY = mouseEvent.getSceneY();
 	            orgTranslateX = ((Node)(mouseEvent.getSource())).getTranslateX();
 	            orgTranslateY = ((Node) (mouseEvent.getSource())).getTranslateY();
-//	            System.out.println("x : "+orgSceneX + " , y : " + orgSceneY );
-//	            System.out.println("trans x : "+ orgTranslateX + " , trans y : " + orgTranslateY );
+
 	        }
 	    };
 	    EventHandler<MouseEvent> OnMouseDragExitedHandler = new EventHandler<MouseEvent>()
@@ -363,26 +368,24 @@ public class Game {
 	    			int plusX = Integer.parseInt(point[0]);
 	    			int plusY = Integer.parseInt(point[1]);
 	    			isFull[x+plusX][y+plusY] = true;
-	    			System.out.println("x , y  : ( " + (x+plusX) + " , " + (y+plusY) + " )");
 	    		}
 	    		score += pointList.length;
 	    		pane.getChildren().remove(rectGroup);
 	    		nextBlockArr.remove(rectGroup);
+	    		System.out.println("num : "+numMap.get(rectGroup));
+	    		currentNext.remove(numMap.get(rectGroup));
 	    		numCheck++;
 	    		System.out.println(numCheck);
 	    		if(numCheck == 3) {
 	    			group[0] = new Group();
 	    			group[1] = new Group();
 	    			group[2] = new Group();
-	    			current[0] = rd.nextInt(point.length);
-	    			current[1] = rd.nextInt(point.length);
-	    			current[2] = rd.nextInt(point.length);
-	    			nextBlock(current[0] , 0);
-	    			nextBlock(current[1] , 1);
-	    			nextBlock(current[2] , 2);
-//	    			nextBlock(18, 0);
-//	    			nextBlock(18, 1);
-//	    			nextBlock(18, 2);
+	    			currentNext.add(0, rd.nextInt(point.length));
+	    			currentNext.add(1, rd.nextInt(point.length));
+	    			currentNext.add(2, rd.nextInt(point.length));
+	    			nextBlock(currentNext.get(0), 0);
+	    			nextBlock(currentNext.get(1), 1);
+	    			nextBlock(currentNext.get(2), 2);
 	    			numCheck = 0;
 	    		}
 	    		

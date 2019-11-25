@@ -59,6 +59,7 @@ public class MainController extends MasterController {
 		reset();
 		MainController mc = (MainController)MainApp.app.getController("main");
 		game = new Game(gamePane, ScoreLabel , bestScoreLabel, gobtn );
+		game.setBestScore(user.getBestScore());
 		mc.setGame(game);
 		game.draw();
 	}
