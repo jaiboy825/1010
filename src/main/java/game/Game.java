@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import com.mysql.cj.jdbc.ha.BestResponseTimeBalanceStrategy;
+
 import domain.UserVO;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -32,7 +34,9 @@ public class Game {
 	private int greenValue = 33;
 	private int blueValue = 66;
 	private Label scoreLabel;
+	private Label bestScoreLabel;
 	private int score = 0;
+	private int bestScore;
 	private int[] current = new int[3];
 	private Rectangle[][] rectArr = new Rectangle[10][10];
 	private Rectangle[][] nextRectArr = new Rectangle[3][];
@@ -42,6 +46,7 @@ public class Game {
 	private int numCheck = 0; 
 	private	Random rd = new Random();
 	private String[] point = new String[19];
+	private UserVO user;
 	double orgSceneX, orgSceneY;
     double orgTranslateX, orgTranslateY;
 
@@ -51,10 +56,11 @@ public class Game {
     private String saveText = "";
     
 	
-	public Game(Pane pane , Label scoreLabel , Button gobtn) {
+	public Game(Pane pane , Label scoreLabel, Label bestScoreLabel , Button gobtn) {
 		this.pane = pane;
 		this.scoreLabel = scoreLabel;
 		this.gobtn = gobtn;
+		this.bestScoreLabel = bestScoreLabel;
 		// 1칸
 		point[0] = "0,0";
 		// 2칸 가로
@@ -111,6 +117,10 @@ public class Game {
 	
 	public void loadingGame(UserVO user) {
 		String saved = user.getGame();
+		score = user.getScore();
+		scoreLabel.setText("Score : "+score + "점");
+		bestScore = user.getBestScore(); 
+		bestScoreLabel.setText("Best : " + bestScore + "점");
 		System.out.println(saved);
 		if(saved != null) {
 		String[] tfs = saved.split(",");
@@ -127,6 +137,7 @@ public class Game {
 		}
 		paint();
 	}
+		this.user = user;
 	}
 	
 	public void setRedValue(int redValue) {
@@ -175,13 +186,19 @@ public class Game {
 			for(int j = 0; j < 10; j++) {
 				for(int x = 0; x < nextBlockArr.size(); x++) {
 					String[] pointList = pointMap.get(nextBlockArr.get(x));
-					if(checkPossible(i, j,pointList)) {
+					if(checkPossible(i, j, pointList)) {
 						gobtn.setDisable(true);
 						return;
 					}
 				}
 			}
 		}
+		if(score > bestScore) {
+			bestScore = score;
+			System.out.println("best  : " + bestScore + " ,  score : "+ score );
+		}
+		bestScoreLabel.setText("Best : " + bestScore + "점");
+		score = 0;
 		gameOver = true;
 		pane.getChildren().add(TextGameOver);
 		MainController mc = (MainController)MainApp.app.getController("main");
@@ -289,6 +306,8 @@ public class Game {
 	}
 	
 	public String saveGame() {
+		String resultString = "";
+		saveText = "";
 		int tf = 0;
 		for(int i = 0; i < 10; i++) {
 			for(int j = 0; j < 10; j++) {
@@ -297,7 +316,9 @@ public class Game {
 				saveText = saveText + tf + ",";
 			}
 		}
-		return saveText;
+		System.out.println("BEST : "+ bestScore);
+		resultString = saveText+":"+score + ":"+ bestScore;
+		return resultString;
 	}
 	
 	   EventHandler<MouseEvent> OnMousePressedEventHandler = new EventHandler<MouseEvent>()

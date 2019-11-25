@@ -6,7 +6,21 @@ public class UserVO {
 	private String name;
 	private String info;
 	private String game;
+	private int score;
+	private int bestScore;
 	
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
+	}
+	public int getBestScore() {
+		return bestScore;
+	}
+	public void setBestScore(int bestScore) {
+		this.bestScore = bestScore;
+	}
 	public String getGame() {
 		return game;
 	}

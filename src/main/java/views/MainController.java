@@ -21,7 +21,7 @@ public class MainController extends MasterController {
 	@FXML
 	private Button LogoutBtn;
 	@FXML
-	private Label BestLabel;
+	private Label bestScoreLabel;
 	@FXML
 	private Label ScoreLabel;
 	@FXML
@@ -45,7 +45,7 @@ public class MainController extends MasterController {
 
 	@FXML
 	private void initialize() {
-		game = new Game(gamePane , ScoreLabel , gobtn);
+		game = new Game(gamePane, ScoreLabel , bestScoreLabel, gobtn );
 		game.draw();
 	}
 
@@ -58,7 +58,7 @@ public class MainController extends MasterController {
 	public void gameStart() {
 		reset();
 		MainController mc = (MainController)MainApp.app.getController("main");
-		game = new Game(gamePane, ScoreLabel , gobtn );
+		game = new Game(gamePane, ScoreLabel , bestScoreLabel, gobtn );
 		mc.setGame(game);
 		game.draw();
 	}
@@ -69,7 +69,7 @@ public class MainController extends MasterController {
 		reset();
 		MainController mc = (MainController)MainApp.app.getController("main");
 		ColorController cc = (ColorController)MainApp.app.getController("color");
-		game = new Game(gamePane , ScoreLabel , gobtn);
+		game = new Game(gamePane, ScoreLabel , bestScoreLabel, gobtn );
 		game.draw();
 		cc.reset();
 		mc.setGame(game);
@@ -79,15 +79,21 @@ public class MainController extends MasterController {
 	}
 	
 	public void saveGame() {
-		String save = game.saveGame();
+		String[] save = game.saveGame().split(":");
+		String game = save[0];
+		Integer score = Integer.parseInt(save[1]);
+		Integer bestScore = Integer.parseInt(save[2]);
+		System.out.println("BEST : "+bestScore);
 		Connection con =  JDBCUtil.getConnection();
 		PreparedStatement pstmt = null;
-		String sql = "update diary_users set game=? where id = ?";
+		String sql = "update diary_users set game=?, score=?, bestScore=? where id = ?";
 		String id = user.getId();
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, save);
-			pstmt.setString(2, id);
+			pstmt.setString(1, game);
+			pstmt.setInt(2, score);
+			pstmt.setInt(3, bestScore);
+			pstmt.setString(4, id);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("데이터베이스 업데이트중");
