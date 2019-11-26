@@ -1,5 +1,6 @@
 package views;
 
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,17 +11,75 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 import main.MainApp;
 import util.JDBCUtil;
 import util.Util;
 
 public class LoginController extends MasterController {
+	boolean mus = false;
+
 	@FXML
 	private TextField txtId;
 	@FXML
 	private PasswordField passField;
 	@FXML
 	private AnchorPane loginPane;
+	
+	public  MediaPlayer bgm;
+
+	public boolean isMus() {
+		return mus;
+	}
+
+	public void setMus(boolean mus) {
+		this.mus = mus;
+	}
+
+	public MediaPlayer getBgm() {
+		return bgm;
+	}
+
+	public void setBgm(MediaPlayer bgm) {
+		this.bgm = bgm;
+	}
+
+	@FXML
+	public void initialize() {
+		setMedia();
+		mus = true;
+		bgm.setVolume(0.3);
+		bgm.play();
+		
+	}
+	public void resetBgm() {
+		bgm.seek(Duration.millis(0));
+	}
+	
+    public void setMedia() {
+		Media mp3;
+		try {
+			mp3 = new Media(getClass().getResource("/resources/mainsong.mp3").toURI().toString());
+			bgm = new MediaPlayer(mp3);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+			System.out.println("�끂�옒 �삤瑜�");
+		}
+		
+	}
+
+	public void stopMusic() {
+		if(mus) {
+			bgm.setVolume(0);
+		}else {
+			bgm.setVolume(0.3);
+		}
+		mus = !mus;
+		
+	}
+	
 
 	@Override
 	public void reset() {

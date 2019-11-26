@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="loginPane" fx:id="loginPage" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.LoginController">
+<AnchorPane id="loginPane" fx:id="loginPane" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.LoginController">
    <children>
       <Label id="loginLabel" alignment="TOP_LEFT" layoutX="62.0" layoutY="14.0" prefHeight="140.0" prefWidth="250.0" text="Page" textFill="#ffa100">
          <font>
@@ -36,6 +36,10 @@
             <Font name="Calibri" size="75.0" />
          </font>
       </Label>
-      <Button layoutX="14.0" layoutY="763.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="145.0" text="id 찾기" />
+      <Button fx:id="muBtn" layoutX="736.0" layoutY="14.0" mnemonicParsing="false" onAction="#stopMusic" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 5px;" styleClass="vbtn" text="♬">
+         <font>
+            <Font size="19.0" />
+         </font></Button>
+      <Label layoutX="547.0" layoutY="14.0" prefHeight="50.0" prefWidth="190.0" text="Soul &amp; Mind - E's Jammy Jam" />
    </children>
 </AnchorPane>

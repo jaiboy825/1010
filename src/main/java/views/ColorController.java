@@ -13,6 +13,7 @@ public class ColorController extends MasterController{
 	@FXML Slider redSd;
 	@FXML Slider greenSd;
 	@FXML Slider blueSd;
+	@FXML Slider slid;
 	@FXML Canvas canvas;
 	
 	private int redValue = 155;
@@ -51,6 +52,15 @@ public class ColorController extends MasterController{
                 }
             });
 		
+		slid.valueProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue<? extends Number> ov,
+                    Number old_val, Number new_val) {
+            	LoginController lc = (LoginController) MainApp.app.getController("login");
+            			lc.bgm.setVolume(new_val.floatValue());
+            			
+                }
+            });
+		
 	}
 	
 	public void setClick() {
@@ -64,17 +74,21 @@ public class ColorController extends MasterController{
 		
 	}
 
+	public Slider getRedSd() {
+		return redSd;
+	}
+
+	public Slider getGreenSd() {
+		return greenSd;
+	}
+
+	public Slider getBlueSd() {
+		return blueSd;
+	}
+
 	@Override
 	public void reset() {
-		MainController mc = (MainController) MainApp.app.getController("main");
-		
-		mc.getGame().setRedValue(155);
-		mc.getGame().setGreenValue(33);
-		mc.getGame().setBlueValue(66);
-		mc.getGame().paint(); 
-		redSd.setValue(155);
-		greenSd.setValue(33);
-		blueSd.setValue(66);
+
 	}
 
 	@Override

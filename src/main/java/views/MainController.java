@@ -3,17 +3,14 @@ package views;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import com.mysql.cj.x.protobuf.MysqlxPrepare.Prepare;
-
 import domain.UserVO;
 import game.Game;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.MediaPlayer;
 import main.MainApp;
 import util.JDBCUtil;
 
@@ -35,6 +32,24 @@ public class MainController extends MasterController {
 
 	private UserVO user;
 	private Game game;
+	
+	@FXML
+	private Button muBtn;
+	public  MediaPlayer bgm;
+	boolean mus = false;
+	
+	public void stopMusic() {
+		LoginController lc = (LoginController) MainApp.app.getController("login");
+		bgm = lc.getBgm();
+		
+		if(!mus) {
+			bgm.setVolume(0);
+		}else {
+			bgm.setVolume(0.3);
+		}
+		mus = !mus;
+		
+	}
 
 
 
@@ -72,7 +87,9 @@ public class MainController extends MasterController {
 		ColorController cc = (ColorController)MainApp.app.getController("color");
 		game = new Game(gamePane, ScoreLabel , bestScoreLabel, gobtn );
 		game.draw();
-		cc.reset();
+		cc.redSd.setValue(155);
+		cc.greenSd.setValue(33);
+		cc.blueSd.setValue(66);
 		mc.setGame(game);
 		MainApp.app.loadPane("login");
 		

@@ -2,20 +2,45 @@
 
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: ivory;" styleClass="colorPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.ColorController">
    <children>
-      <Canvas fx:id="canvas" height="358.0" layoutX="50.0" layoutY="340.0" width="700.0" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" />
-      <Slider fx:id="redSd" layoutX="50.0" layoutY="50.0" max="255.0" prefHeight="100.0" prefWidth="700.0" showTickLabels="true" showTickMarks="true" value="155.0" />
-      <Slider fx:id="blueSd" layoutX="50.0" layoutY="240.0" max="255.0" prefHeight="100.0" prefWidth="700.0" showTickLabels="true" showTickMarks="true" value="66.0" />
-      <Slider fx:id="greenSd" layoutX="50.0" layoutY="140.0" max="255.0" prefHeight="100.0" prefWidth="700.0" showTickLabels="true" showTickMarks="true" value="33.0" />
-      <Button fx:id="chgbtn" alignment="CENTER" layoutX="686.0" layoutY="750.0" mnemonicParsing="false" onAction="#setClick" prefHeight="36.0" prefWidth="100.0" style="-fx-background-radius: 10px;" styleClass="btn-change" text="change" textAlignment="CENTER">
+      <Canvas fx:id="canvas" height="208.0" layoutX="50.0" layoutY="450.0" width="240.0" />
+      <Slider fx:id="redSd" layoutX="340.0" layoutY="446.0" max="255.0" prefHeight="50.0" prefWidth="400.0" showTickLabels="true" showTickMarks="true" value="155.0" />
+      <Slider fx:id="blueSd" layoutX="340.0" layoutY="608.0" max="255.0" prefHeight="50.0" prefWidth="400.0" showTickLabels="true" showTickMarks="true" value="66.0" />
+      <Slider fx:id="greenSd" layoutX="340.0" layoutY="529.0" max="255.0" prefHeight="50.0" prefWidth="400.0" showTickLabels="true" showTickMarks="true" value="33.0" />
+      <Button fx:id="chgbtn" alignment="CENTER" layoutX="686.0" layoutY="750.0" mnemonicParsing="false" onAction="#setClick" prefHeight="36.0" prefWidth="100.0" style="-fx-background-radius: 10px;" styleClass="btn-change" text="Ok" textAlignment="CENTER">
          <font>
             <Font size="19.0" />
          </font>
       </Button>
+      <Label layoutX="305.0" layoutY="446.0" prefHeight="50.0" prefWidth="35.0" text="Red" />
+      <Label layoutX="305.0" layoutY="529.0" prefHeight="50.0" prefWidth="35.0" text="Green" />
+      <Label layoutX="305.0" layoutY="608.0" prefHeight="50.0" prefWidth="35.0" text="Blue" />
+      <Label layoutX="50.0" layoutY="350.0" prefHeight="50.0" prefWidth="240.0" text="Block Color">
+         <font>
+            <Font name="Calibri" size="35.0" />
+         </font>
+      </Label>
+      <Label layoutX="50.0" layoutY="14.0" prefHeight="50.0" prefWidth="240.0" text="Option">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <Label layoutX="50.0" layoutY="146.0" prefHeight="50.0" prefWidth="240.0" text="Volume">
+         <font>
+            <Font name="Calibri" size="35.0" />
+         </font>
+      </Label>
+      <Slider fx:id="slid" layoutX="50.0" layoutY="214.0" majorTickUnit="0.1" max="1.0" prefHeight="50.0" prefWidth="700.0" showTickLabels="true" showTickMarks="true" value="0.3" />
+      <Label layoutX="363.0" layoutY="196.0" text="Volume Size">
+         <font>
+            <Font name="Calibri" size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -120,6 +120,21 @@ public class Game {
 		scoreLabel.setText("Score : "+score + "점");
 		bestScore = user.getBestScore(); 
 		bestScoreLabel.setText("Best : " + bestScore + "점");
+		
+		System.out.println(saved);
+		if(saved != null) {
+		String[] tfs = saved.split(",");
+		int z = 0;
+		for(int i = 0; i < 10; i++) {
+			for(int j = 0; j < 10; j++) {
+				if (tfs[z].equals("1")) {
+					isFull[i][j] = true;
+				}else {
+					isFull[i][j] = false;
+				}
+				z++;
+			}
+		}
 		String[] nextBlockList = user.getNextBlock().split(",");
 		System.out.println(nextBlockList);
 		nextBlockArr.clear();
@@ -137,20 +152,7 @@ public class Game {
 			nextBlock(Integer.parseInt(nextBlockList[i]), i);
 		}
 		numCheck = 3 - nextBlockList.length;
-		System.out.println(saved);
-		if(saved != null) {
-		String[] tfs = saved.split(",");
-		int z = 0;
-		for(int i = 0; i < 10; i++) {
-			for(int j = 0; j < 10; j++) {
-				if (tfs[z].equals("1")) {
-					isFull[i][j] = true;
-				}else {
-					isFull[i][j] = false;
-				}
-				z++;
-			}
-		}
+		
 		paint();
 	}
 		checkGameOver();
