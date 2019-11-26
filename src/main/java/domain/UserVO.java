@@ -8,9 +8,16 @@ public class UserVO {
 	private String game;
 	private int score;
 	private int bestScore;
+	private String nextBlock;
 	
 	public int getScore() {
 		return score;
+	}
+	public String getNextBlock() {
+		return nextBlock;
+	}
+	public void setNextBlock(String nextBlock) {
+		this.nextBlock = nextBlock;
 	}
 	public void setScore(int score) {
 		this.score = score;

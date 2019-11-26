@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import com.mysql.cj.jdbc.ha.BestResponseTimeBalanceStrategy;
-
 import domain.UserVO;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -38,7 +36,7 @@ public class Game {
 	private int score = 0;
 	private int bestScore;
 	private ArrayList<Integer> currentNext = new ArrayList<Integer>();
-	private int[] current = new int[3];
+//	private int[] current = new int[3];
 	private Rectangle[][] rectArr = new Rectangle[10][10];
 	private Rectangle[][] nextRectArr = new Rectangle[3][];
 	private Boolean[][] isFull = new Boolean[10][10];
@@ -122,6 +120,23 @@ public class Game {
 		scoreLabel.setText("Score : "+score + "점");
 		bestScore = user.getBestScore(); 
 		bestScoreLabel.setText("Best : " + bestScore + "점");
+		String[] nextBlockList = user.getNextBlock().split(",");
+		System.out.println(nextBlockList);
+		nextBlockArr.clear();
+		currentNext.clear();
+		pane.getChildren().remove(group[0]);
+		pane.getChildren().remove(group[1]);
+		pane.getChildren().remove(group[2]);
+		group[0] = new Group();
+		group[1] = new Group();
+		group[2] = new Group();
+		for(int i = 0; i < nextBlockList.length; i++) {
+			System.out.println(nextBlockList[i]);
+			currentNext.add(Integer.parseInt(nextBlockList[i]));
+			System.out.println(currentNext);
+			nextBlock(Integer.parseInt(nextBlockList[i]), i);
+		}
+		numCheck = 3 - nextBlockList.length;
 		System.out.println(saved);
 		if(saved != null) {
 		String[] tfs = saved.split(",");
@@ -138,6 +153,8 @@ public class Game {
 		}
 		paint();
 	}
+		checkGameOver();
+		
 		this.user = user;
 	}
 	
@@ -200,6 +217,7 @@ public class Game {
 				}
 			}
 		}
+		System.out.println(nextBlockArr);
 		if(score > bestScore) {
 			bestScore = score;			
 			user.setBestScore(bestScore);
@@ -258,9 +276,9 @@ public class Game {
 			}
 		}
 
-		currentNext.add(0, rd.nextInt(point.length));
-		currentNext.add(1, rd.nextInt(point.length));
-		currentNext.add(2, rd.nextInt(point.length));
+		currentNext.add(rd.nextInt(point.length));
+		currentNext.add(rd.nextInt(point.length));
+		currentNext.add(rd.nextInt(point.length));
 		nextBlock(currentNext.get(0), 0);
 		nextBlock(currentNext.get(1), 1);
 		nextBlock(currentNext.get(2), 2);
@@ -323,7 +341,9 @@ public class Game {
 				saveText = saveText + tf + ",";
 			}
 		}
-		resultString = saveText+":"+score + ":"+ bestScore;
+		String nextBlock = "";
+		for(Integer next : currentNext) nextBlock = nextBlock + next + ","; 
+		resultString = saveText+":"+score + ":"+ bestScore+ ":"+ nextBlock ;
 		return resultString;
 	}
 	
@@ -371,18 +391,19 @@ public class Game {
 	    		}
 	    		score += pointList.length;
 	    		pane.getChildren().remove(rectGroup);
+	    		int removeNum = (numMap.get(rectGroup)-numCheck);
+	    		if(removeNum < 0) removeNum = 0;
+	    		currentNext.remove(removeNum);
+	    		System.out.println("num : "+(numMap.get(rectGroup)-numCheck));
 	    		nextBlockArr.remove(rectGroup);
-	    		System.out.println("num : "+numMap.get(rectGroup));
-	    		currentNext.remove(numMap.get(rectGroup));
 	    		numCheck++;
-	    		System.out.println(numCheck);
 	    		if(numCheck == 3) {
 	    			group[0] = new Group();
 	    			group[1] = new Group();
 	    			group[2] = new Group();
-	    			currentNext.add(0, rd.nextInt(point.length));
-	    			currentNext.add(1, rd.nextInt(point.length));
-	    			currentNext.add(2, rd.nextInt(point.length));
+	    			currentNext.add(rd.nextInt(point.length));
+	    			currentNext.add(rd.nextInt(point.length));
+	    			currentNext.add(rd.nextInt(point.length));
 	    			nextBlock(currentNext.get(0), 0);
 	    			nextBlock(currentNext.get(1), 1);
 	    			nextBlock(currentNext.get(2), 2);
@@ -401,7 +422,7 @@ public class Game {
 	    			}
 	    		}
 	    		checkGameOver();
-
+	    		System.out.println(currentNext);
 	    		scoreLabel.setText("Score : "+score + "점");
 	    		
 			}

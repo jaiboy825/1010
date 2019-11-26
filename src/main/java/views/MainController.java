@@ -84,17 +84,19 @@ public class MainController extends MasterController {
 		String game = save[0];
 		Integer score = Integer.parseInt(save[1]);
 		Integer bestScore = Integer.parseInt(save[2]);
+		String nextBlock = save[3];
 		System.out.println("BEST : "+bestScore);
 		Connection con =  JDBCUtil.getConnection();
 		PreparedStatement pstmt = null;
-		String sql = "update diary_users set game=?, score=?, bestScore=? where id = ?";
+		String sql = "update diary_users set game=?, score=?, bestScore=?, nextBlock=? where id = ?";
 		String id = user.getId();
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, game);
 			pstmt.setInt(2, score);
 			pstmt.setInt(3, bestScore);
-			pstmt.setString(4, id);
+			pstmt.setString(4, nextBlock);
+			pstmt.setString(5, id);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("데이터베이스 업데이트중");

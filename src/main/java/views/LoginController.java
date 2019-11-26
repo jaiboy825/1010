@@ -73,6 +73,7 @@ public class LoginController extends MasterController {
 				user.setGame(rs.getString("game"));
 				user.setBestScore(rs.getInt("bestScore"));
 				user.setScore(rs.getInt("score"));
+				user.setNextBlock(rs.getString("nextBlock"));
 				return user;
 			}
 			return null;
