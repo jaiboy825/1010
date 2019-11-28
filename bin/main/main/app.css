@@ -65,3 +65,51 @@
 	-fx-background-color:#006fff;
 	-fx-border-color:#006fff;
 }
+.vbtn {
+	-fx-background-color : #FAF4C0;
+	-fx-border-color : #FAF4C0;
+}
+.vbtn:hover {
+	-fx-background-color : #D9E5FF;
+	-fx-border-color : #D9E5FF;
+}
+.ngbtn {
+	-fx-background-color : #CEFBC9;
+	-fx-border-color : #CEFBC9;
+}
+.ngbtn:hover {
+	-fx-background-color : #86E57F;
+	-fx-border-color : #86E57F;
+}
+.lgbtn {
+	-fx-background-color : #FFE08C;
+	-fx-border-color : #FFE08C;
+}
+.lgbtn:hover {
+	-fx-background-color : #FFBB00;
+	-fx-border-color : #FFBB00;
+}
+.mmbtn {
+	-fx-background-color : #FAF4C0;
+	-fx-border-color : #FAF4C0;
+}
+.mmbtn:hover {
+	-fx-background-color : #D9E5FF;
+	-fx-border-color : #D9E5FF;
+}
+.opbtn {
+	-fx-background-color : #D9E5FF;
+	-fx-border-color : #D9E5FF;
+}
+.opbtn:hover {
+	-fx-background-color : #FAF4C0;
+	-fx-border-color : #FAF4C0;
+}
+.btn-change {
+	-fx-background-color : #CEFBC9;
+	-fx-border-color : #CEFBC9;
+}
+.btn-change :hover {
+	-fx-background-color : #86E57F;
+	-fx-border-color : #86E57F;
+}

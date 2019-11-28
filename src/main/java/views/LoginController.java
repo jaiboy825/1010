@@ -29,7 +29,9 @@ public class LoginController extends MasterController {
 	private AnchorPane loginPane;
 	
 	public  MediaPlayer bgm;
-
+	
+	
+	
 	public boolean isMus() {
 		return mus;
 	}
@@ -51,6 +53,9 @@ public class LoginController extends MasterController {
 		setMedia();
 		mus = true;
 		bgm.setVolume(0.3);
+//		TimerThread tt = new TimerThread(bgm);
+//		Thread thread = new Thread(tt);
+//		thread.start();
 		bgm.play();
 		
 	}
@@ -63,9 +68,12 @@ public class LoginController extends MasterController {
 		try {
 			mp3 = new Media(getClass().getResource("/resources/mainsong.mp3").toURI().toString());
 			bgm = new MediaPlayer(mp3);
+			bgm.setOnEndOfMedia(()->{
+				bgm.seek(Duration.ZERO);
+			});
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
-			System.out.println("�끂�옒 �삤瑜�");
+			System.out.println("음악 오류");
 		}
 		
 	}
@@ -103,8 +111,10 @@ public class LoginController extends MasterController {
 		if (user != null) {
 			MainController mc = (MainController) MainApp.app.getController("main");
 			mc.setLoginInfo(user);
-			MainApp.app.slideOut(getRoot());
+			MainApp.app.fadeOut(getRoot());
 			mc.getGame().loadingGame(user);
+			
+			mc.getLogoutBtn().setDisable(false);
 		} else {
 			Util.showAlert("에러", "존재하지 않는 아이디이거나 비밀번호가 틀립니다.", AlertType.ERROR);
 			return;

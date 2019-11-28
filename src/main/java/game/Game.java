@@ -55,6 +55,10 @@ public class Game {
     private String saveText = "";
     
 	
+	public void setScore(int score) {
+		this.score = score;
+	}
+
 	public Game(Pane pane , Label scoreLabel, Label bestScoreLabel , Button gobtn) {
 		this.pane = pane;
 		this.scoreLabel = scoreLabel;
@@ -67,13 +71,13 @@ public class Game {
 		// 2칸 세로
 		point[2] = "0,0:0,1";
 		// 3칸 가로
-		point[3] = "0,0:1,0:2,0";
+		point[3] = "0,0:1,0:-1,0";
 		// 3칸 세로
-		point[4] = "0,0:0,1:0,2";
+		point[4] = "0,0:0,1:0,-1";
 		// 4칸 가로
-		point[5] = "0,0:1,0:2,0:3,0";
+		point[5] = "0,0:1,0:2,0:-1,0";
 		// 4칸 세로
-		point[6] = "0,0:0,1:0,2:0,3";
+		point[6] = "0,0:0,1:0,-1:0,-2";
 		// 5칸 가로
 		point[7] = "0,0:-2,0:-1,0:1,0:2,0";
 		// 5칸 세로
@@ -213,7 +217,6 @@ public class Game {
 				for(int x = 0; x < nextBlockArr.size(); x++) {
 					String[] pointList = pointMap.get(nextBlockArr.get(x));
 					if(checkPossible(i, j, pointList)) {
-						gobtn.setDisable(true);
 						return;
 					}
 				}

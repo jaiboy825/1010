@@ -9,6 +9,7 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -33,6 +34,7 @@ public class MainApp extends Application {
 		return controllerMap.get(name);
 	}
 
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		app = this;
@@ -87,6 +89,8 @@ public class MainApp extends Application {
 
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			primaryStage.setTitle("1010!");
+			primaryStage.getIcons().add(new Image("/resources/1010!.png"));
 
 			sc.init();
 		} catch (Exception e) {
@@ -112,7 +116,7 @@ public class MainApp extends Application {
 		Timeline timeline = new Timeline();
 		KeyValue toRight = new KeyValue(pane.translateXProperty(), 0);
 		KeyValue fadeOut = new KeyValue(pane.opacityProperty(), 1);
-		KeyFrame keyFrame = new KeyFrame(Duration.millis(500), toRight, fadeOut);
+		KeyFrame keyFrame = new KeyFrame(Duration.millis(400), toRight, fadeOut);
 
 		timeline.getKeyFrames().add(keyFrame);
 		timeline.play();
@@ -123,7 +127,7 @@ public class MainApp extends Application {
 		KeyValue toRight = new KeyValue(pane.translateXProperty(), 800);
 		KeyValue fadeOut = new KeyValue(pane.opacityProperty(), 0);
 
-		KeyFrame keyFrame = new KeyFrame(Duration.millis(500), (e) -> {
+		KeyFrame keyFrame = new KeyFrame(Duration.millis(400), (e) -> {
 			mainPage.getChildren().remove(pane);
 		}, toRight, fadeOut);
 

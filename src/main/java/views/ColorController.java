@@ -19,7 +19,12 @@ public class ColorController extends MasterController{
 	private int redValue = 155;
 	private int greenValue = 33;
 	private int blueValue = 66;
+	private float slidValue = (float) 0.3;
 	
+	public float getSlidValue() {
+		return slidValue;
+	}
+
 	@FXML 
 	private void initialize() {
 		GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -56,7 +61,8 @@ public class ColorController extends MasterController{
             public void changed(ObservableValue<? extends Number> ov,
                     Number old_val, Number new_val) {
             	LoginController lc = (LoginController) MainApp.app.getController("login");
-            			lc.bgm.setVolume(new_val.floatValue());
+            	slidValue = new_val.floatValue();		
+            	lc.bgm.setVolume(slidValue);
             			
                 }
             });
@@ -88,7 +94,7 @@ public class ColorController extends MasterController{
 
 	@Override
 	public void reset() {
-
+		
 	}
 
 	@Override

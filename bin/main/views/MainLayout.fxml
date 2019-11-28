@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="mainPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: ivory;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.MainController">
+<StackPane fx:id="mainPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: ivory;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.MainController">
    <children>
       <Pane prefHeight="800.0" prefWidth="800.0">
          <children>
-            <Button fx:id="LogoutBtn" layoutX="710.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#logout" prefHeight="50.0" prefWidth="75.0" text="Logout">
+            <Button fx:id="LogoutBtn" layoutX="710.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#logout" prefHeight="50.0" prefWidth="75.0" styleClass="lgbtn" text="Logout">
                <font>
                   <Font name="Calibri" size="16.0" />
                </font>
@@ -31,17 +31,17 @@
                   <Font name="Calibri" size="30.0" />
                </font>
             </Label>
-            <Button layoutX="14.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#setColor" prefHeight="31.0" prefWidth="146.0" text="Option">
+            <Button layoutX="14.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#setColor" prefHeight="31.0" prefWidth="146.0" styleClass="opbtn" text="Option">
                <font>
                   <Font name="Calibri" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="gobtn" disable="true" layoutX="611.0" layoutY="715.0" mnemonicParsing="false" onAction="#gameStart" opacity="0.0" prefHeight="50.0" prefWidth="175.0" text="Restart">
+            <Button fx:id="gobtn" layoutX="570.0" layoutY="350.0" mnemonicParsing="false" onAction="#gameStart" prefHeight="50.0" prefWidth="216.0" styleClass="ngbtn" text="New Game">
                <font>
-                  <Font size="25.0" />
+                  <Font name="Calibri" size="25.0" />
                </font>
             </Button>
-            <Button fx:id="muBtn" layoutX="191.0" layoutY="22.0" mnemonicParsing="false" onMouseClicked="#stopMusic" prefHeight="37.0" prefWidth="60.0" text="♬">
+            <Button fx:id="muBtn" layoutX="191.0" layoutY="22.0" mnemonicParsing="false" onMouseClicked="#stopMusic" prefHeight="37.0" prefWidth="60.0" styleClass="mmbtn" text="♬">
                <font>
                   <Font size="15.0" />
                </font>
