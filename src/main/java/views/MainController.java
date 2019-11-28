@@ -101,8 +101,8 @@ public class MainController extends MasterController {
 		cc.blueSd.setValue(66);
 		mc.setGame(game);
 		MainApp.app.loadPane("login");
-//		System.out.println(bgm);
-//		bgm.setVolume(0.3);
+		cc.getSlid().setValue(0.3);
+		
 		LogoutBtn.setDisable(true);
 
 	}

@@ -93,7 +93,7 @@ public class LoginController extends MasterController {
 	public void reset() {
 		txtId.setText("");
 		passField.setText("");
-
+		bgm.setVolume(0.3);
 	}
 
 	public void loginProcess() {
@@ -110,10 +110,10 @@ public class LoginController extends MasterController {
 
 		if (user != null) {
 			MainController mc = (MainController) MainApp.app.getController("main");
+			ColorController cc = (ColorController) MainApp.app.getController("color");
 			mc.setLoginInfo(user);
 			MainApp.app.fadeOut(getRoot());
 			mc.getGame().loadingGame(user);
-			
 			mc.getLogoutBtn().setDisable(false);
 		} else {
 			Util.showAlert("에러", "존재하지 않는 아이디이거나 비밀번호가 틀립니다.", AlertType.ERROR);

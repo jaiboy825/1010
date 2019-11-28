@@ -84,6 +84,10 @@ public class ColorController extends MasterController{
 		return redSd;
 	}
 
+	public Slider getSlid() {
+		return slid;
+	}
+
 	public Slider getGreenSd() {
 		return greenSd;
 	}
